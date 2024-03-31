@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Boxes</title>
+    <style>
+        /* Basic styling for the text boxes */
+        .textbox-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center-align text boxes */
+            margin: 10px;
+            padding-bottom: 15px; /* Add some padding for spacing */
+        }
+        .textbox-header {
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between; /* Right-align button */
+            align-items: center; /* Vertically center header and button */
+            width: 75%;
+            margin: 5px;
+        }
+        .textbox {
+            width: 75%; /* Set width to half of the page */
+            padding: 5px;
+            white-space: pre-wrap; /* Allow automatic line breaks */
+            resize: none; /* Disable manual resizing */
+            overflow: hidden; /* Hide vertical scrollbar */
+        }
+        .copy-button {
+            cursor: pointer;
+        }
+        .div-i {
+            width: 50%;
+            margin-left: 25%;
+            margin-right: 25%;
+            border: 1px solid #000; /* Add border to the container */
+        }
+        /* Remove blue background on text selection */
+        ::selection {
+            background-color: transparent;
+        }
+        /* Style copy confirmation popup */
+        .copy-popup {
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #000;
+            padding: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button onclick="addNewBox()">Add</button>
+    </header>
+    <div class="div-i">
+        <!-- Existing text boxes will be here -->
+        <div class="textbox-container">
+            <div class="textbox-header">
+                プロンプト
+                <button class="copy-button" onclick="copyText('promptTextbox')">Copy</button>
+            </div>
+            <input type="text" class="textbox" id="promptTextbox" placeholder="プロンプトを入力してください...">
+        </div>
+        <div class="textbox-container">
+            <div class="textbox-header">
+                ネガティブプロンプト
+                <button class="copy-button" onclick="copyText('negativePromptTextbox')">Copy</button>
+            </div>
+            <input type="text" class="textbox" id="negativePromptTextbox" placeholder="ネガティブプロンプトを入力してください...">
+        </div>
+    </div>
+
+    <script>
+        // Function to add a new text box
+        function addNewBox() {
+            const newContainer = document.createElement("div");
+            newContainer.className = "dev-i";
+            newContainer.innerHTML = `
+            <div class="textbox-container">
+                <div class="textbox-header">
+                    プロンプト
+                    <button class="copy-button" onclick="copyText('promptTextbox')">Copy</button>
+                </div>
+                <input type="text" class="textbox" id="promptTextbox" placeholder="プロンプトを入力してください...">
+            </div>
+            <div class="textbox-container">
+            <div class="textbox-header">
+                    ネガティブプロンプト
+                    <button class="copy-button" onclick="copyText('negativePromptTextbox')">Copy</button>
+                </div>
+                <input type="text" class="textbox" id="negativePromptTextbox" placeholder="ネガティブプロンプトを入力してください...">
+            </div>
+            `;
+            document.querySelector(".div-i").appendChild(newContainer);
+        }
+        // Rest of the JavaScript functions (copyText, showCopyPopup) remain unchanged
+    </script>
+</body>
+</html>
